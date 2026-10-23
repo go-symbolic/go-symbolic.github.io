@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ .Site.Title }} — computer algebra, planned</title>
+<meta name="description" content="{{ .Site.Params.description }}">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+{{ partial "styles.html" . }}
+</head>
+<body class="lm">
+  <header class="nav"><div class="wrap">
+    <a class="brand" href="/"><img class="glyph" src="/img/logo.svg" width="32" height="32" alt="go-symbolic logo"> {{ .Site.Title }}</a>
+    <nav><a href="#features">Scope</a><a href="#exact">Checks</a><a href="#repos">Repositories</a></nav>
+    {{ partial "theme-toggle.html" . }}
+  </div></header>
+  {{ partial "fork-ribbon.html" "https://github.com/go-symbolic" }}
+
+  <div class="hero"><div class="wrap">
+    <div>
+      <h1 class="head">Computer algebra in pure Go.<br><span class="accent">Planned, wave 4 of the go-scikit roadmap.</span></h1>
+      <p class="sub"><b>go-symbolic is the planned home of computer algebra for go-scikit</b>: expressions, polynomials, differentiation, integration, series, limits and solving, as Mathematica's core offers them, and what Maple adds on top (code generation, algebraic numbers, ODE and PDE solving, triangular decomposition, differential algebra, symbolic random variables, groups and tensors). It is in <b>wave 4</b>, the last of the roadmap, because nearly everything in it waits for the core: the expression DAG, polynomials, GCD and factorisation. There is no library and no release yet: this page says what is planned, in which wave, and against which references it will be validated.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://go-symbolic.github.io/docs/">{{ partial "icons/book.html" . }}Read the plan in the documentation →</a>
+        <a class="btn btn-ghost" href="https://github.com/go-scikit/roadmap/blob/main/PLAN.md">{{ partial "icons/github.html" . }}The roadmap (PLAN.md) →</a>
+      </div>
+      <div class="trust"><span><b>planned</b> wave 4</span><span><b>no</b> release yet</span><span><b>CGO=0</b> pure Go</span></div>
+    </div>
+    <div class="term">
+      <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="t">status</span></div>
+<pre style="white-space:pre;overflow-x:auto;tab-size:4">org      go-symbolic
+domain   computer algebra
+status   planned (wave 4)
+release  none yet
+oracles  SymPy, python-flint, PARI/GP, FriCAS, Rubi
+plan     go-scikit/roadmap: PLAN.md, STATUS.md</pre>
+    </div>
+  </div></div>
+
+  <div class="strip"><div class="wrap">
+    <span class="lead-line">Planned, <b>wave 4</b>: no library is released. The plan is <a href="https://github.com/go-scikit/roadmap/blob/main/PLAN.md">PLAN.md</a>, the state of each item <a href="https://github.com/go-scikit/roadmap/blob/main/STATUS.md">STATUS.md</a>.</span>
+    <div class="mods">{{ range .Site.Params.repos }}<a href="{{ .href }}">{{ .name }}</a>{{ end }}</div>
+  </div></div>
+
+  <section id="features"><div class="wrap">
+    <span class="eyebrow">What go-symbolic will cover</span>
+    <h2>computer algebra, <i>in pure Go</i>.</h2>
+    <p class="lead"><b>go-symbolic is the planned home of computer algebra for go-scikit</b>: expressions, polynomials, differentiation, integration, series, limits and solving, as Mathematica's core offers them, and what Maple adds on top (code generation, algebraic numbers, ODE and PDE solving, triangular decomposition, differential algebra, symbolic random variables, groups and tensors). It is in <b>wave 4</b>, the last of the roadmap, because nearly everything in it waits for the core: the expression DAG, polynomials, GCD and factorisation. Everything below is planned, not released.</p>
+    <div class="grid">
+      <div class="card"><div class="ico">∑</div><h3>Expressions and polynomials</h3><p>A hash-consed expression DAG with canonical forms, polynomials over Z, Q and F_p, rational functions, differentiation and expansion.</p></div>
+      <div class="card"><div class="ico">÷</div><h3>GCD and factorisation</h3><p>Modular GCD, Cantor-Zassenhaus over F_p, Hensel lifting with van Hoeij recombination over Z.</p></div>
+      <div class="card"><div class="ico">∫</div><h3>Integration, series, limits</h3><p>Rational integration (Hermite, Lazard-Rioboo-Trager), Risch-Norman, a rule engine with Rubi's rules, power series and Gruntz limits.</p></div>
+      <div class="card"><div class="ico">⚙</div><h3>Gröbner and solving</h3><p>Buchberger then F4 modulo p, and polynomial-system solving.</p></div>
+      <div class="card"><div class="ico">⌘</div><h3>Code generation to Go</h3><p>Expressions to Go source with common-subexpression elimination on the DAG; C and Fortran emitters only as test oracles.</p></div>
+      <div class="card"><div class="ico">∂</div><h3>The Maple delta</h3><p>Algebraic numbers, ODE and PDE solving, triangular decomposition and CAD, differential algebra, symbolic random variables, groups and tensors.</p></div>
+      <div class="card"><div class="ico">🧪</div><h3>Validated against free oracles</h3><p>SymPy, python-flint, PARI/GP, Maxima and FriCAS are run as oracles from Go; Maple is proprietary and never one.</p></div>
+      <div class="card"><div class="ico">⚖️</div><h3>BSD-3-Clause</h3><p>GPL and LGPL systems are compared against, never ported; SymPy, FriCAS, Reduce and Rubi are the portable references.</p></div>
+    </div>
+  </div></section>
+
+  <section id="exact" style="padding-top:10px"><div class="wrap">
+    <span class="eyebrow">How it will be checked</span>
+    <h2>{{ len .Site.Params.checks }} kinds of check, each <i>against a reference</i>.</h2>
+    <p class="lead">Every go-scikit library is validated against the tool that is the reference of its domain, run as an oracle from Go. These are the criteria planned for go-symbolic.</p>
+    <div class="grid">
+      {{ range .Site.Params.checks }}
+      <div class="card"><h3>{{ .name }}</h3><p>{{ .what | markdownify }}</p></div>
+      {{ end }}
+    </div>
+  </div></section>
+
+  <section id="repos" style="padding-top:20px"><div class="wrap">
+    <span class="eyebrow">Repositories</span>
+    <h2>What is planned, and what is here.</h2>
+    <div class="road">
+      {{ range .Site.Params.repos }}
+      <div class="ph">
+        <div class="top"><h4><a href="{{ .href }}">{{ .name }}</a></h4><span class="tag">{{ .kind }}</span></div>
+        <p>{{ .blurb | safeHTML }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div></section>
+
+  <section id="eco" style="padding-top:6px"><div class="wrap">
+    <div class="band">
+      <h2>computer algebra for go-scikit.</h2>
+      <p>go-symbolic is planned, wave 4. The <a href="https://go-symbolic.github.io/docs/"><u>documentation</u></a> holds its scope, its plan and its references; the roadmap is <a href="https://github.com/go-scikit/roadmap/blob/main/PLAN.md"><u>PLAN.md</u></a>.</p>
+      <a class="btn btn-ghost" href="https://github.com/go-symbolic">{{ partial "icons/github.html" . }}Read the source on GitHub →</a>
+    </div>
+  </div></section>
+
+  <footer><div class="wrap"><span>go-symbolic · <a href="https://github.com/go-symbolic">go-symbolic on GitHub</a> · BSD-3-Clause</span><span>exact · by construction</span></div></footer>
+</body>
+</html>
