@@ -20,10 +20,8 @@
     <div>
       <h1 class="head">Computer algebra in pure Go.<br><span class="accent">Planned, wave 4 of the go-scikit roadmap.</span></h1>
       <p class="sub"><b>go-symbolic is the planned home of computer algebra for go-scikit</b>: expressions, polynomials, differentiation, integration, series, limits and solving, as Mathematica's core offers them, and what Maple adds on top (code generation, algebraic numbers, ODE and PDE solving, triangular decomposition, differential algebra, symbolic random variables, groups and tensors). It is in <b>wave 4</b>, the last of the roadmap, because nearly everything in it waits for the core: the expression DAG, polynomials, GCD and factorisation. There is no library and no release yet: this page says what is planned, in which wave, and against which references it will be validated.</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="https://go-symbolic.github.io/docs/">{{ partial "icons/book.html" . }}Read the plan in the documentation →</a>
-        <a class="btn btn-ghost" href="https://github.com/go-scikit/roadmap/blob/main/PLAN.md">{{ partial "icons/github.html" . }}The roadmap (PLAN.md) →</a>
-      </div>
+      {{/* [[params.cta]] in hugo.toml: the kit renders the row */}}
+      {{ partial "cta.html" . }}
       <div class="trust"><span><b>planned</b> wave 4</span><span><b>no</b> release yet</span><span><b>CGO=0</b> pure Go</span></div>
     </div>
     <div class="term">
@@ -54,7 +52,7 @@ plan     go-scikit/roadmap: PLAN.md, STATUS.md</pre>
       <div class="card"><div class="ico">⌘</div><h3>Code generation to Go</h3><p>Expressions to Go source with common-subexpression elimination on the DAG; C and Fortran emitters only as test oracles.</p></div>
       <div class="card"><div class="ico">∂</div><h3>The Maple delta</h3><p>Algebraic numbers, ODE and PDE solving, triangular decomposition and CAD, differential algebra, symbolic random variables, groups and tensors.</p></div>
       <div class="card"><div class="ico">🧪</div><h3>Validated against free oracles</h3><p>SymPy, python-flint, PARI/GP, Maxima and FriCAS are run as oracles from Go; Maple is proprietary and never one.</p></div>
-      <div class="card"><div class="ico">⚖️</div><h3>BSD-3-Clause</h3><p>GPL and LGPL systems are compared against, never ported; SymPy, FriCAS, Reduce and Rubi are the portable references.</p></div>
+      {{ if not (partial "mantra-on.html" $) }}<div class="card"><div class="ico">⚖️</div><h3>BSD-3-Clause</h3><p>GPL and LGPL systems are compared against, never ported; SymPy, FriCAS, Reduce and Rubi are the portable references.</p></div>{{ end }}
     </div>
   </div></section>
 
@@ -90,6 +88,6 @@ plan     go-scikit/roadmap: PLAN.md, STATUS.md</pre>
     </div>
   </div></section>
 
-  <footer><div class="wrap"><span>go-symbolic · <a href="https://github.com/go-symbolic">go-symbolic on GitHub</a> · BSD-3-Clause</span><span>exact · by construction</span></div></footer>
+  <footer><div class="wrap"><span>go-symbolic · <a href="https://github.com/go-symbolic">go-symbolic on GitHub</a>{{ if not (partial "mantra-on.html" $) }} · BSD-3-Clause{{ end }}</span><span>exact · by construction</span></div></footer>
 </body>
 </html>

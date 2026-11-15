@@ -73,3 +73,13 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   chipFgDark = "#eac0ee"
   statsEnd = "#f6e3f8"
   bandText = "#f9edfa"
+
+# The hero's buttons, rendered by landingkit's cta.html in the kit's order.
+[[params.cta]]
+  kind  = "docs"
+  href  = "https://go-symbolic.github.io/docs/"
+  label = "Read the plan in the documentation →"
+[[params.cta]]
+  kind  = "github"
+  href  = "https://github.com/go-scikit/roadmap/blob/main/PLAN.md"
+  label = "The roadmap (PLAN.md) →"
